@@ -20,3 +20,8 @@ verifyStoreIntegrity: true
 # Some registries allow the exact same content to be published under different package names and/or versions.
 # Ref: https://pnpm.io/ja/settings/store#strictstorepkgcontentcheck
 strictStorePkgContentCheck: true
+
+##### build #####
+# When strictDepBuilds is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
+# Ref: https://pnpm.io/ja/settings/build#strictdepbuilds
+strictDepBuilds: true
