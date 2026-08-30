@@ -11,3 +11,12 @@ trustPolicy: no-downgrade
 # When set to true, only direct dependencies (those listed in your root package.json) may use exotic sources (like git repositories or direct tarball URLs).
 # Ref: https://pnpm.io/ja/settings/dependency-resolution#trustpolicy
 blockExoticSubdeps: true
+
+##### store #####
+# By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's node_modules.
+# If verifyStoreIntegrity is set to false, files in the content-addressable store will not be checked during installation.
+# Ref: https://pnpm.io/ja/settings/store#verifystoreintegrity
+verifyStoreIntegrity: true
+# Some registries allow the exact same content to be published under different package names and/or versions.
+# Ref: https://pnpm.io/ja/settings/store#strictstorepkgcontentcheck
+strictStorePkgContentCheck: true
