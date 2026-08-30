@@ -1,6 +1,7 @@
 {
   "name": "HomePage",
   "version": "0.0.1",
+  "private": true,
   "description": "",
   "author": "maeda.naoki.md9@gmail.com",
   "scripts": {
