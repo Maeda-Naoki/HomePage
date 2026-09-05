@@ -6,4 +6,7 @@
 			"PnpmVersion": "12.1.0"
 		}
 	},
+	"remoteUser": "author",
+	"workspaceFolder": "/home/author/HomePage",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/author/HomePage,type=bind,consistency=cached",
 }
