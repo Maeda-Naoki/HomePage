@@ -19,3 +19,8 @@ ARG PnpmStoreDir="${UserHomeDir}/HomePage/.pnpm-store"
 
 ## pnpm setting
 ARG PnpmVersion=12.1.0
+
+# Docker image environment variables
+## pnpm environment variables
+ENV PNPM_HOME="${UserHomeDir}/.local/share/pnpm"
+ENV PATH="${PNPM_HOME}:${PATH}"
