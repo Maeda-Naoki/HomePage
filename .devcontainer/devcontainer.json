@@ -1,3 +1,9 @@
 {
 	"name": "HomePageDevContainer",
+	"build":{
+		"dockerfile": "../Dockerfile",
+		"args": {
+			"PnpmVersion": "12.1.0"
+		}
+	},
 }
