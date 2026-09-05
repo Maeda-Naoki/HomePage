@@ -1,0 +1,43 @@
+{
+	"name": "HomePageDevContainer",
+	"build":{
+		"dockerfile": "../Dockerfile",
+		"args": {
+			"PnpmVersion": "12.1.0"
+		}
+	},
+	"remoteUser": "author",
+	"workspaceFolder": "/home/author/HomePage",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/author/HomePage,type=bind,consistency=cached",
+	"mounts": [
+		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash",
+						"icon": "terminal-bash"
+					}
+				},
+				"editor": {
+					"defaultFormatter": "oxc.oxc-vscode",
+					"formatOnSave": true,
+					"formatOnSaveMode": "file"
+				}
+			},
+			"extensions": [
+				// Editor
+				"editorconfig.editorconfig",
+				// Oxlint
+				"oxc.oxc-vscode",
+				// textlint
+				"3w36zj6.textlint",
+				// Error Lens
+				"usernamehw.errorlens"
+			]
+		}
+	}
+}

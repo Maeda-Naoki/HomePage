@@ -1,0 +1,58 @@
+# Base Docker image
+FROM node:26.8.1-trixie-slim@sha256:c0753125a3789977aefe869cbebccf70e3cfd7ea84ca48547458f02e4f1d7146
+
+# Metadata of Docker image
+LABEL maintainer="maeda.naoki.md9@gmail.com"
+LABEL version="1.0.0"
+
+# Docker image args
+## User setting
+ARG GID=10000
+ARG UID=10000
+ARG GroupName="AuthorGroup"
+ARG UserName="author"
+ARG UserHomeDir="/home/author"
+
+## Node modules setting
+ARG NodeModulesDir="${UserHomeDir}/HomePage/node_modules"
+ARG PnpmStoreDir="${UserHomeDir}/HomePage/.pnpm-store"
+
+## pnpm setting
+ARG PnpmVersion=12.1.0
+
+# Docker image environment variables
+## pnpm environment variables
+ENV PNPM_HOME="${UserHomeDir}/.local/share/pnpm"
+ENV PATH="${PNPM_HOME}:${PATH}"
+
+# Run command
+## Remove default user & Add user (Non-root user)
+RUN groupdel -f node && userdel -r node && \
+    groupadd -g ${GID} ${GroupName} && \
+    adduser --uid ${UID} --gid ${GID} --home ${UserHomeDir} ${UserName}
+
+RUN mkdir -p ${NodeModulesDir} && \
+	mkdir -p ${PnpmStoreDir} && \
+	chown -R ${UID}:${GID} ${UserHomeDir} && \
+	chown -R ${UID}:${GID} ${PnpmStoreDir}
+
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	ca-certificates \
+	curl && \
+	update-ca-certificates && \
+	rm -rf /var/lib/apt/lists/*
+
+# Switch to non-root user
+USER ${UID}
+
+# Install pnpm
+## https://pnpm.io/ja/installation
+RUN curl -fsSL https://get.pnpm.io/install.sh | \
+    env PNPM_VERSION=${PnpmVersion} SHELL="$(which bash)" bash -
+
+# Setup working user
+WORKDIR ${UserHomeDir}
+
+# Run bash
+CMD ["/bin/bash"]
