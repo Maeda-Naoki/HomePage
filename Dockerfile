@@ -31,6 +31,26 @@ RUN groupdel -f node && userdel -r node && \
     groupadd -g ${GID} ${GroupName} && \
     adduser --uid ${UID} --gid ${GID} --home ${UserHomeDir} ${UserName}
 
+RUN mkdir -p ${NodeModulesDir} && \
+	mkdir -p ${PnpmStoreDir} && \
+	chown -R ${UID}:${GID} ${UserHomeDir} && \
+	chown -R ${UID}:${GID} ${PnpmStoreDir}
+
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	ca-certificates \
+	curl && \
+	update-ca-certificates && \
+	rm -rf /var/lib/apt/lists/*
+
+# Switch to non-root user
+USER ${UID}
+
+# Install pnpm
+## https://pnpm.io/ja/installation
+RUN curl -fsSL https://get.pnpm.io/install.sh | \
+    env PNPM_VERSION=${PnpmVersion} SHELL="$(which bash)" bash -
+
 # Setup working user
 WORKDIR ${UserHomeDir}
 
