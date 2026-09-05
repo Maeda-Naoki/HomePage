@@ -24,3 +24,15 @@ ARG PnpmVersion=12.1.0
 ## pnpm environment variables
 ENV PNPM_HOME="${UserHomeDir}/.local/share/pnpm"
 ENV PATH="${PNPM_HOME}:${PATH}"
+
+# Run command
+## Remove default user & Add user (Non-root user)
+RUN groupdel -f node && userdel -r node && \
+    groupadd -g ${GID} ${GroupName} && \
+    adduser --uid ${UID} --gid ${GID} --home ${UserHomeDir} ${UserName}
+
+# Setup working user
+WORKDIR ${UserHomeDir}
+
+# Run bash
+CMD ["/bin/bash"]
