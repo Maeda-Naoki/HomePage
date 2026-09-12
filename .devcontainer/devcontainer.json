@@ -33,6 +33,8 @@
 			"extensions": [
 				// Editor
 				"editorconfig.editorconfig",
+				// Astro
+				"astro-build.astro-vscode",
 				// Oxlint
 				"oxc.oxc-vscode",
 				// textlint
