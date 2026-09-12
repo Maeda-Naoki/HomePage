@@ -11,7 +11,9 @@
 	"workspaceMount": "source=${localWorkspaceFolder},target=/home/author/HomePage,type=bind,consistency=cached",
 	"mounts": [
 		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-		"source=pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume"
+		"source=pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
+		"source=astro,target=${containerWorkspaceFolder}/.astro,type=volume"
+
 	],
 	"customizations": {
 		"vscode": {
@@ -31,6 +33,8 @@
 			"extensions": [
 				// Editor
 				"editorconfig.editorconfig",
+				// Astro
+				"astro-build.astro-vscode",
 				// Oxlint
 				"oxc.oxc-vscode",
 				// textlint

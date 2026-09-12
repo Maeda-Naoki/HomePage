@@ -25,3 +25,7 @@ strictStorePkgContentCheck: true
 # When strictDepBuilds is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 # Ref: https://pnpm.io/ja/settings/build#strictdepbuilds
 strictDepBuilds: true
+# A map of package matchers to explicitly allow (true) or disallow (false) script execution.
+# Ref: https://pnpm.io/ja/settings/build#allowbuilds
+allowBuilds:
+  esbuild: true
