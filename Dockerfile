@@ -38,9 +38,13 @@ RUN mkdir -p ${NodeModulesDir} && \
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	ca-certificates \
-	curl && \
+    sudo=1.9.16p2-3+deb13u2		\
+	ca-certificates=20250419    \
+    git=1:2.47.3-0+deb13u1      \
+	curl=8.14.1-2+deb13u5       && \
 	update-ca-certificates && \
+	echo "${UserName} ALL=(ALL) NOPASSWD: /usr/bin/chown" > /etc/sudoers.d/${UserName} && \
+	chmod 0440 /etc/sudoers.d/${UserName} && \
 	rm -rf /var/lib/apt/lists/*
 
 # Switch to non-root user
