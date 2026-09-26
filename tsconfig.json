@@ -1,5 +1,9 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
+  "extends": "astro/tsconfigs/strictest",
+
+  "exclude": ["node_modules", ".pnpm-store"],
+
   "compilerOptions": {
     // File Layout
     "rootDir": ".",
