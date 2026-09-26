@@ -13,12 +13,8 @@ ARG GroupName="AuthorGroup"
 ARG UserName="author"
 ARG UserHomeDir="/home/author"
 
-## Node modules setting
-ARG NodeModulesDir="${UserHomeDir}/HomePage/node_modules"
-ARG PnpmStoreDir="${UserHomeDir}/HomePage/.pnpm-store"
-
 ## pnpm setting
-ARG PnpmVersion=12.1.0
+ARG PnpmVersion=12.6.0
 
 # Docker image environment variables
 ## pnpm environment variables
@@ -30,11 +26,6 @@ ENV PATH="${PNPM_HOME}:${PATH}"
 RUN groupdel -f node && userdel -r node && \
     groupadd -g ${GID} ${GroupName} && \
     adduser --uid ${UID} --gid ${GID} --home ${UserHomeDir} ${UserName}
-
-RUN mkdir -p ${NodeModulesDir} && \
-	mkdir -p ${PnpmStoreDir} && \
-	chown -R ${UID}:${GID} ${UserHomeDir} && \
-	chown -R ${UID}:${GID} ${PnpmStoreDir}
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
