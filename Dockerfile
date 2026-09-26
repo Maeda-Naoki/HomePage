@@ -13,12 +13,8 @@ ARG GroupName="AuthorGroup"
 ARG UserName="author"
 ARG UserHomeDir="/home/author"
 
-## Node modules setting
-ARG NodeModulesDir="${UserHomeDir}/HomePage/node_modules"
-ARG PnpmStoreDir="${UserHomeDir}/HomePage/.pnpm-store"
-
 ## pnpm setting
-ARG PnpmVersion=12.1.0
+ARG PnpmVersion=12.6.0
 
 # Docker image environment variables
 ## pnpm environment variables
@@ -31,16 +27,15 @@ RUN groupdel -f node && userdel -r node && \
     groupadd -g ${GID} ${GroupName} && \
     adduser --uid ${UID} --gid ${GID} --home ${UserHomeDir} ${UserName}
 
-RUN mkdir -p ${NodeModulesDir} && \
-	mkdir -p ${PnpmStoreDir} && \
-	chown -R ${UID}:${GID} ${UserHomeDir} && \
-	chown -R ${UID}:${GID} ${PnpmStoreDir}
-
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	ca-certificates \
-	curl && \
+    sudo=1.9.16p2-3+deb13u2		\
+	ca-certificates=20250419    \
+    git=1:2.47.3-0+deb13u1      \
+	curl=8.14.1-2+deb13u5       && \
 	update-ca-certificates && \
+	echo "${UserName} ALL=(ALL) NOPASSWD: /usr/bin/chown" > /etc/sudoers.d/${UserName} && \
+	chmod 0440 /etc/sudoers.d/${UserName} && \
 	rm -rf /var/lib/apt/lists/*
 
 # Switch to non-root user

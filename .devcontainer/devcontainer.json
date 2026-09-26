@@ -10,11 +10,11 @@
 	"workspaceFolder": "/home/author/HomePage",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/home/author/HomePage,type=bind,consistency=cached",
 	"mounts": [
-		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-		"source=pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
-		"source=astro,target=${containerWorkspaceFolder}/.astro,type=volume"
-
+		"source=${devcontainerId}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=${devcontainerId}-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
+		"source=${devcontainerId}-astro,target=${containerWorkspaceFolder}/.astro,type=volume"
 	],
+	"postCreateCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder}/node_modules ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/.astro",
 	"customizations": {
 		"vscode": {
 			"settings": {
