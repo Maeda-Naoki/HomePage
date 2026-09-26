@@ -14,6 +14,7 @@
 		"source=${devcontainerId}-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume",
 		"source=${devcontainerId}-astro,target=${containerWorkspaceFolder}/.astro,type=volume"
 	],
+	"postCreateCommand": "sudo chown -R $(id -u):$(id -g) ${containerWorkspaceFolder}/node_modules ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/.astro",
 	"customizations": {
 		"vscode": {
 			"settings": {
