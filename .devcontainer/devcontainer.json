@@ -3,7 +3,7 @@
 	"build":{
 		"dockerfile": "../Dockerfile",
 		"args": {
-			"PnpmVersion": "12.1.0"
+			"PnpmVersion": "12.7.0"
 		}
 	},
 	"remoteUser": "author",

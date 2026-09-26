@@ -14,7 +14,7 @@ ARG UserName="author"
 ARG UserHomeDir="/home/author"
 
 ## pnpm setting
-ARG PnpmVersion=12.6.0
+ARG PnpmVersion=12.7.0
 
 # Docker image environment variables
 ## pnpm environment variables
